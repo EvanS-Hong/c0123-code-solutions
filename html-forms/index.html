@@ -5,12 +5,12 @@
   <body>
     <h1> Coding Form!
     </h1>
+    <label for="email-address">Email</label>
     <div>
-      <label for="email-address">Email</label> <br>
       <input type="text" name="email" size="15" maxlength="50" />
-    </div><br>
+    </div>
+    <label> Why is coding cool?</label>
     <div>
-      <label> Why is coding cool?</label> <br>
       <select name="reason">
         <option value="select an option">Select an option</option>
         <option value="Because it's interesting">Because it's interesting</option>
@@ -18,7 +18,7 @@
         <option value="Because its's powerful">Because it's powerful</option>
       </select>
     </div>
-    <p> Favorite Language (choose one) <br>
+    <p> Favorite Language (choose one)
     <div>
       <input type="radio" name="language" value="HTML"> HTML
       <input type="radio" name="language" value="CSS"> CSS
@@ -26,12 +26,16 @@
     </div>
     </p>
     <label> Would you like to sign up for more information? </label>
-    <p>
-      <input type="checkbox" name="service" value="sign me up"> Sign me up! <br>
-      Comments<br>
+    <div>
+      <input type="checkbox" name="service" value="sign me up"> Sign me up!
+    </div>
+    <label for="comments"> Comments</label>
+    <div>
       <textarea name="comments" cols="32" rows="10"></textarea><br>
       <input type="submit" name="submit" value="submit"></input>
-    </p>
+    </div>
+
+
 
 
 
