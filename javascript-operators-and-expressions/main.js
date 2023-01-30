@@ -29,11 +29,11 @@ console.log('value of isAcidic: ' +  isAcidic);
 console.log('type of is Acidic: ' + typeof isAcidic);
 
 var headCount = 8
-var isSparta = headCount==300
+var isSparta = headCount === 300
 console.log('value of isSparta: ' +  isSparta);
 console.log('type of isSparta: ' + typeof isSparta);
 
 var motto = fullName;
-var motto = fullName + ' is the GOAT';
+motto += fullName + ' is the GOAT';
 console.log('value of motto: ' + motto);
 console.log('type of motto: ' + typeof motto);
