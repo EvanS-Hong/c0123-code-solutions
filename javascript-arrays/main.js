@@ -14,5 +14,5 @@ console.log('The class has ' + numberOfStudents +' students');
 
 var lastIndex = numberOfStudents -= 1;
 
-lastStudent = student[lastIndex];
+var lastStudent = student[lastIndex];
 console.log('The last student in the class is ' + lastStudent);
