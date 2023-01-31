@@ -23,14 +23,10 @@ var getAreaResults = getArea(6, 3);
 console.log('getAreaResults is: ', getAreaResults);
 
 function getFirstName(person) {
-  var person = {
-    firstName: 'Ray',
-    lastName: 'Chase',
-  };
   return person.firstName;
 }
 
-var getFirstNameResults = getFirstName('person')
+var getFirstNameResults = getFirstName({firstName: 'Ray', lastName: 'Chase'});
 console.log('getFirstNameResults is: ', getFirstNameResults);
 
 function getLastElement (array) {
