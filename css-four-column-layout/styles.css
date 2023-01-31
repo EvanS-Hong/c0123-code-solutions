@@ -1,3 +1,7 @@
+body {
+  background-color: #F7F8FA;
+}
+
 h1 {
   display: flex;
   justify-content: center;
