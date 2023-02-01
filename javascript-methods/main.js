@@ -14,7 +14,7 @@ var randomIndex = Math.floor(randomNumber);
 
 console.log(randomIndex);
 
-randomHero = heroes[randomIndex];
+var randomHero = heroes[randomIndex];
 
 console.log(randomHero);
 
