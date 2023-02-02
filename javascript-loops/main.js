@@ -7,11 +7,11 @@
             getValues
  */
 function getNumbersToTen() {
-var numbers = [];
-var currentNumber = 1;
-while (currentNumber < 11 ) {
- numbers.push(currentNumber);
- currentNumber += 1;
+  var numbers = [];
+  var currentNumber = 1;
+  while (currentNumber < 11 ) {
+  numbers.push(currentNumber);
+  currentNumber += 1;
 }; return numbers;
 }
 
@@ -19,8 +19,8 @@ function getEvenNumbersToTwenty() {
   var evenNumbers = [];
   var currentNumber = 2;
   while (currentNumber < 21) {
-    evenNumbers.push(currentNumber);
-    currentNumber += 2;
+  evenNumbers.push(currentNumber);
+  currentNumber += 2;
   } return evenNumbers;
 }
 
@@ -39,20 +39,20 @@ function logEachCharacter(string) {
 }}
 
 function doubleAll(numbers) {
- var doubled = [];
- for ( i = 0; i < numbers.length; i++) {
+  var doubled = [];
+  for ( i = 0; i < numbers.length; i++) {
   doubled.push(numbers[i] * 2);
  } return doubled; }
 
  function getKeys(object) {
-  keys = [];
+  var keys = [];
   for (let key in object) {
     keys.push(key);
   } return keys;
  }
 
  function getValues(object) {
-  values = [];
+  var values = [];
   for (let key in object) {
     values.push(object[key]);
   } return values;
