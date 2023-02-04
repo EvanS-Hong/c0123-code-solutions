@@ -1,0 +1,73 @@
+.top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: #a0a0a0;
+  border-width: 1px;
+  border-bottom-style: solid;
+}
+
+h1.title {
+  font-family: Tiempos Headline, sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  color: #0a4265;
+  font-size: 50px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+}
+
+.links {
+  margin-right: 70px;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+.header {
+  margin-left: 150px;
+  font-size: 20px;
+}
+
+a {
+  margin-right: 90px;
+}
+
+a.product,
+a.implementation,
+a.about-us,
+a.blog {
+  text-decoration: none;
+  color: #a0a0a0;
+}
+
+a.contact-us {
+  text-decoration: none;
+  background-color: #0a4265;
+  color: white;
+  padding: 15px 20px;
+  font-size: 20px;
+}
+
+.picture {
+  background-image: url(images/about-us/about-us-header.jpg);
+  background-repeat: no-repeat;
+  background-position: right 0% bottom 50%;
+  background-size: cover;
+  position: relative;
+  height: 700px;
+  max-width: 1500px;
+  margin-top: 80px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.text {
+  position: absolute;
+  color: white;
+  left: 80px;
+  bottom: 300px;
+}
