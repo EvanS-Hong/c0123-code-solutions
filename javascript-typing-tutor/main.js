@@ -5,7 +5,7 @@ function typedLetter() {
     if (key === current[i].textContent) {
       current[i].className = 'correct-letter';
       current[i + 1].className = 'current-type';
-      return i++,
+      return i++;
     } else {current[i].className = 'wrong-letter';
     }
   }
