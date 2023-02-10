@@ -14,10 +14,16 @@ var array = [ {
   "author": "Redro Dradnats",
 },
 ];
- var string = JSON.stringify(array);
- console.log(string);
+console.log(array);
+console.log(typeof(array));
 
- var string2 = '{"numberID": "249675", "stringName": "Brandon Cho"}'
- console.log(typeof(string2));
+var string = JSON.stringify(array);
+console.log(typeof(string));
+console.log(string);
 
- console.log(typeof(JSON.parse(string2)));
+var string2 = '{"numberID": "249675", "stringName": "Brandon Cho"}'
+console.log(typeof(string2));
+console.log(string2);
+
+console.log(typeof(JSON.parse(string2)));
+console.log(JSON.parse(string2));
