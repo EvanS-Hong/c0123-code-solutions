@@ -7,7 +7,9 @@ function countDown() {
     return i;
   } else {
     countText.textContent = '~Earth Beeeeeloooowww Us~';
+    clearInterval(countInterval);
   }
+
 }
 
-setInterval(countDown, 1000);
+var countInterval = setInterval(countDown, 1000);
