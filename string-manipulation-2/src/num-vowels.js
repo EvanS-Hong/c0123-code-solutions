@@ -2,17 +2,16 @@
 function numVowels(string) {
   var numOfVowels = 0;
 
-  var stringArray = string.split('');
-  for ( i = 0; i < stringArray.length; i++) {
-    if (stringArray[i] == 'a' || stringArray[i] == 'A') {
+  for ( i = 0; i < string.length; i++) {
+    if (string[i] == 'a' || string[i] == 'A') {
   numOfVowels += 1;
-    } else if (stringArray[i] == 'e' || stringArray[i] == 'E') {
+    } else if (string[i] == 'e' || string[i] == 'E') {
       numOfVowels += 1;
-    } else if (stringArray[i] == 'i' || stringArray[i] == 'I') {
+    } else if (string[i] == 'i' || string[i] == 'I') {
       numOfVowels += 1;
-    } else if (stringArray[i] == 'o' || stringArray[i] == 'O') {
+    } else if (string[i] == 'o' || string[i] == 'O') {
       numOfVowels += 1;
-    } else if (stringArray[i] == 'u' || stringArray[i] == 'U') {
+    } else if (string[i] == 'u' || string[i] == 'U') {
       numOfVowels += 1;
     }
   } return numOfVowels;
