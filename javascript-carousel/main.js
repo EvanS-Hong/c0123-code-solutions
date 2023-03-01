@@ -5,7 +5,6 @@ var arrowRow = document.querySelector('.row1');
 var currentNumber = 0;
 
 function buttonSwap(event) {
-  console.log('clic');
   if (event.target.matches('.fa-circle')) {
   for ( var i = 0; i < buttons.length; i++) {
     if (event.target.getAttribute('id') === buttons[i].getAttribute('id')) {
