@@ -1,0 +1,92 @@
+    1  git branch list--
+    2  git branch --list
+    3  git switch es6-arrow-functions
+    4  git push origin es6-arrow-functions
+    5  git switch main
+    6  git status
+    7  git add.
+    8  git add .
+    9  git commit -m "Fixed linter rules"
+   10  git push origin main
+   11  git switch es6-arrow-functions
+   12  git switch main
+   13  git pull origin main
+   14  git status
+   15  git add .
+   16  git commit -m "consolidation"
+   17  git push origin main
+   18  git status
+   19  git branch command-line-basics
+   20  git switch command-line-basics
+   21  cd command-line-basics
+   22  man man
+   23  man cat
+   24  man cat
+   25  cat laziness.txt
+   26  cat impatience
+   27  cat impatience.txt
+   28  cat hubris.txt
+   29  cat laziness.txt impatience.txt hubris.txt
+   30  cat laziness.txt impatience.txt hubris.txt > three-virtues.txt
+   31  cat three-virtues.txt
+   32  man ls
+   33  man ls
+   34  ls
+   35  ls -a
+   36  ls -F
+   37  ls lfz-staff
+   38  ls lfz-staff -a
+   39  ls lfz-staff -F
+   40  man ls
+   41  la -aF lfz-staff > lfz-staff/contents.txt
+   42  ls -aF lfz-staff > lfz-staff/contents.txt
+   43  cat lfz=staff/contents.txt
+   44  cat lfz-staff/contents.txt
+   45  man pwd
+   46  pwd
+   47  pwd > i-was-here.txt
+   48  ls 
+   49  cat i-was-here.txt
+   50  man echo
+   51  echo 'Hello World'
+   52  echo 'Hello World' > hello.txt
+   53  ls hello.txt
+   54  cat hello.txt
+   55  man touch
+   56  touch tag-youre-it.txt
+   57  touch snoot/\boop.txt
+   58  touch snoot/boop.txt
+   59  ls snooth
+   60  ls snoot
+   61  mkdir
+   62  man mkdir
+   63  mkdir parent 
+   64  ls parent
+   65  ls parent
+   66  mkdir -p parent/child/grandchild
+   67  touch .gitkeep parent/child/grandchild
+   68  touch parent/.gitkeep
+   69  ls -a git parent
+   70  la -a parent
+   71  ls -a parent
+   72  ls -a child
+   73  ls -a parent/child
+   74  man rm
+   75  man mv
+   76  mv pokiemans pokemon
+   77  ls pokemon
+   78  man rm
+   79  rm lol.txt
+   80  ls lol.txtls lol.txt
+   81  rm -r kill-me
+   82  ls kill-me
+   83  man cp
+   84  cp no-and-then.txt
+   85  cp and-then.txt no-and-then.txt
+   86  ls and-then.txt
+   87  ls no-and-then.txt
+   88  cat and-then.txt
+   89  cat no-and-then.txt
+   90  man history
+   91  history
+   92  history > command-history.txt
