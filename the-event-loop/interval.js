@@ -1,6 +1,6 @@
 let count = 3;
 
-let decrement = () => {
+const decrement = () => {
   if (count > 0) {
     console.log(count);
     count--;
