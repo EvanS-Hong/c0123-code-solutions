@@ -1,2 +1,2 @@
-let divide = (a, b) => a / b;
+const divide = (a, b) => a / b;
 export default divide;
