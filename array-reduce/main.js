@@ -17,9 +17,9 @@ const traits = [
   { trainer: 'ash' },
 ];
 
-let initialValue = 0;
+
 const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue,
-  initialValue);
+  0);
 console.log(sum);
 
 const product = numbers.reduce((total, current) => total * current);
@@ -27,7 +27,7 @@ console.log(product);
 
 const balance = account.reduce((total, current) =>  (current.type === 'withdrawal')
   ? (total - current.amount)
-  : (total + current.amount), initialValue);
+  : (total + current.amount), 0);
 console.log(balance);
 
 const composite = traits.reduce((object, current) => Object.assign(object, current), {});
