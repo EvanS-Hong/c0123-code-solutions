@@ -9,17 +9,3 @@ Promise.all(promises)
   .catch((error) => {
     console.log(error.message);
   });
-
-
-
-  // Promise.all(newPromises).then((values) => {
-  //   console.log(values);
-  // });
-
-// try {
-//   const filePath = new URL(link, import.meta.url);
-//   const contents = await readFile(filePath, { encoding: 'utf8' });
-//   console.log(contents);
-// } catch (err) {
-//   console.error(err.message);
-// }});
