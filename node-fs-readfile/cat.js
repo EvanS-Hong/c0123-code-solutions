@@ -7,7 +7,7 @@ Promise.all(promises)
     console.log(values.join('\n'));
   })
   .catch((error) => {
-    console.log('Invalid text file found in list');
+    console.log(error.message);
   });
 
 
