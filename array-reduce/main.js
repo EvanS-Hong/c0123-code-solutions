@@ -21,17 +21,14 @@ let initialValue = 0;
 const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue,
   initialValue);
 console.log(sum);
+
 const product = numbers.reduce((total, current) => total * current);
 console.log(product);
-const balance = account.reduce((total, current) => console.log(current.type),
-initialValue);
-//   let total = 0;
-//   for (let i = 0; i < account.length; i++) {
-//     if ( account[i].type === 'withdrawal') {
-//       total -= account[i].amount;
-//     } else {
-//       total += account[i].amount;
-//     }
-//   } return total;
-// });
+
+const balance = account.reduce((total, current) =>  (current.type === 'withdrawal')
+  ? (total - current.amount)
+  : (total + current.amount), initialValue);
 console.log(balance);
+
+const composite = traits.reduce((object, current) => Object.assign(object, current), {});
+console.log(composite);
