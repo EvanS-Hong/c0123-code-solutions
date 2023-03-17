@@ -1,9 +1,18 @@
 import { writeFile } from 'node:fs/promises';
 import { readFile } from 'node:fs/promises';
 
+
+async function newJsonData() {
+  return JSON.parse(await readFile("./data.json"));
+
+}
+async function creation() {
+  return await writeFile("./data.json", JSON.stringify(jsonData, null, 2), 'utf8');
+}
+
 if (process.argv[2] === "read") {
   try {
-    const jsonData =  JSON.parse(await readFile("./data.json"));
+    const jsonData = await newJsonData();
     for (let keys in jsonData.notes) {
       console.log(`${keys}: ${jsonData.notes[keys]}`)
     }
@@ -11,42 +20,36 @@ if (process.argv[2] === "read") {
     console.log(err);
   }
 } else if (process.argv[2] === "create") {
-  try {
-    const jsonData = JSON.parse(await readFile("./data.json"));
-    const jsonID = JSON.stringify(jsonData.nextId, null, 2);
-    let noteArray = Object.entries(jsonData.notes).map(([k, v]) => ({ [k]: v }));
-    noteArray.push({[jsonID]: `${process.argv[3]}`});
-    let newObj = {}
-    for (let x = 0; x < noteArray.length; x++) {
-      Object.assign(newObj, noteArray[x]);
-    }
-    jsonData.notes = newObj
-    jsonData.nextId = jsonData.nextId + 1;
-    await writeFile("./data.json", JSON.stringify(jsonData, null, 2), 'utf8');
+    try {
+      const jsonData = await newJsonData();
+      let noteArray = Object.entries(jsonData.notes).map(([k, v]) => ({ [k]: v }));
+      noteArray.push({[jsonData.nextId]: `${process.argv[3]}`});
+      let newObj = {}
+      for (let x = 0; x < noteArray.length; x++) {
+        Object.assign(newObj, noteArray[x]);
+      }
+      jsonData.notes = newObj
+      jsonData.nextId = jsonData.nextId + 1;
+      const newFile = await creation();
+      console.log(newFile);
     } catch (err) {
-    console.log(err);
-  }
-} else if (process.argv[2] === "update") {
-  const jsonData = JSON.parse(await readFile("./data.json"));
-  let currentNumber = process.argv[3];
-  for (let keys in jsonData.notes) {
-    if (currentNumber === keys) {
-      jsonData.notes[currentNumber] = process.argv[4];
-      (jsonData.notes[currentNumber]);
-      await writeFile("./data.json", JSON.stringify(jsonData, null, 2), 'utf8');
+      console.log(err);
     }
+} else if (process.argv[2] === "update") {
+  try {
+  const jsonData = await newJsonData();
+  let currentNumber = process.argv[3];
+    jsonData.notes[currentNumber] = process.argv[4];
+    const newFile = await creation();
   } catch (err) {
-    console.log(err);
+   console.log(err);
   }
 } else if (process.argv[2] === "delete") {
-  const jsonData = JSON.parse(await readFile("./data.json"));
+  try {
+  const jsonData = await newJsonData();
   let currentNumber = process.argv[3];
-  for (let keys in jsonData.notes) {
-    if (currentNumber === keys) {
-      delete jsonData.notes[currentNumber]
-      await writeFile("./data.json", JSON.stringify(jsonData, null, 2), 'utf8');
-    }
+    delete jsonData.notes[currentNumber]
   } catch (err) {
-    console.log(err);
+  console.log(err);
   }
 }
