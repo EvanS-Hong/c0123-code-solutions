@@ -35,6 +35,8 @@ if (process.argv[2] === "read") {
       (jsonData.notes[currentNumber]);
       await writeFile("./data.json", JSON.stringify(jsonData, null, 2), 'utf8');
     }
+  } catch (err) {
+    console.log(err);
   }
 } else if (process.argv[2] === "delete") {
   const jsonData = JSON.parse(await readFile("./data.json"));
@@ -44,5 +46,7 @@ if (process.argv[2] === "read") {
       delete jsonData.notes[currentNumber]
       await writeFile("./data.json", JSON.stringify(jsonData, null, 2), 'utf8');
     }
+  } catch (err) {
+    console.log(err);
   }
 }
