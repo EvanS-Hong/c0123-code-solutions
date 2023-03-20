@@ -24,7 +24,7 @@ const grades = {
 }
 
 app.get('/api/grades' , (req, res) => {
-  let newObj = {};
+  const newObj = {};
   for (let key in grades) {
      newObj[key] = (grades[key]);
   }
