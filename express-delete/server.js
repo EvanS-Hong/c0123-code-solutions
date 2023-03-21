@@ -21,12 +21,23 @@ const grades = {
     course: 'JavaScript',
     score: 92
   }
-};
+}
 
-app.length('/api/grades', (req, res) => {
+app.get('/api/grades', (req, res) => {
   const newArray = [];
-  for (let keys in grades) {
+  for (let key in grades) {
     newArray.push(grades[key]);
   }
   res.send(newArray);
-}
+});
+
+app.delete('/api/grades/:Id', (req, res) => {
+  const id = +req.params.Id;
+  delete grades[id];
+  res.sendStatus(204);
+});
+
+
+app.listen((8080), () => {
+  console.log('The server is listening(Port 8080)');
+});
