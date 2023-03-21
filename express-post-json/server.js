@@ -7,14 +7,19 @@ const grades = {}
 
 app.get('/api/grades', (req, res) => {
   const newArray = [];
-  newArray.push(grades);
+  for (let keys in grades) {
+    newArray.push(grades[keys]);
+  }
   res.json(newArray);
 });
 
 app.use(express.json());
 
 app.post('/api/grades', (req, res) => {
-  res.send()
+  const newObj = req.body;
+  newObj.nextId = nextId++
+  grades[nextId] = newObj;
+  res.status(201).json(newObj);
 }
 );
 
