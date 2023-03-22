@@ -36,12 +36,12 @@ app.get('/api/notes/:id', async (req, res) => {
     if (id <= 0) {
       res.status(400).json({ error: 'given id is not a positive integer' });
     } else if (jsonData.notes[id] === undefined) {
-      res.status(400).json({ error: 'id not found in notes' });
+      res.status(404).json({ error: 'id not found in notes' });
     } else {
       res.status(200).json(jsonData.notes[id]);
     }
   } catch (err) {
-    console.error('/api/notes error', err);
+    res.status(500).json({ error: 'an unexpected error occurred' });
   }
 });
 
@@ -62,7 +62,7 @@ app.post('/api/notes', async (req, res) => {
       res.status(201).json(newObj);
     }
   } catch (err) {
-    console.error(err);
+    res.status(500).json({ error: 'an unexpected error occurred' });
   }
 });
 
@@ -80,7 +80,7 @@ app.delete('/api/notes/:id', async (req, res) => {
       res.status(200).json({});
     }
   } catch (err) {
-    console.error('/api/notes error', err);
+    res.status(500).json({ error: 'an unexpected error occurred' });
   }
 });
 
@@ -91,17 +91,19 @@ app.put('/api/notes/:id', async (req, res) => {
     const id = +req.params.id;
     const newInfo = req.body
     newInfo.id = id;
-    if (id <= 0) {
+    if (id <= 0 ) {
       res.status(400).json({ error: 'given id is not a positive integer' });
+    } else if (req.body.content === undefined) {
+      res.status(400).json({ error: 'content propertiy not found' });
     } else if (jsonData.notes[id] === undefined) {
       res.status(400).json({ error: 'id not found in notes' });
     } else {
       jsonData.notes[id] = newInfo;
-      console.log(jsonData);
       await creation(jsonData);
+      res.status(200).json(newInfo);
     }
   } catch (err) {
-    console.error('/api/notes error', err);
+    res.status(500).json({ error: 'an unexpected error occurred' });
   }
 });
 
