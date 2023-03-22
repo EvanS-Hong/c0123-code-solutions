@@ -28,7 +28,7 @@ app.get('/api/grades' , (req, res) => {
   for (let key in grades) {
      newObj.push(grades[key]);
   }
-   res.send(newObj);
+   res.send(newArray);
 }
 
 );
