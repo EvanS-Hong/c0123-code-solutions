@@ -1,0 +1,128 @@
+import express from './node_modules/express/index.js';
+import { writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
+
+import pg from 'pg';
+
+const db = new pg.Pool({
+  connectionString: 'postgres://dev:dev@localhost/studentGradeTable',
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+
+async function newJsonData() {
+  return JSON.parse(await readFile("./data.json"));
+}
+
+async function creation(data) {
+  return await writeFile("./data.json", JSON.stringify(data, null, 2), 'utf8');
+}
+
+const app = express();
+
+app.use(express.json());
+
+app.get('/api/grades', async (req, res) => {
+  try {
+    const sql = `
+    select *
+    from "grades";`
+    const result = await db.query(sql)
+    const grades = result.rows;
+      res.status(200).json(grade);
+    } catch (err) {
+    console.error('/api/notes error', err);
+    res.status(500).json({ error: 'an unexpected error occurred' });
+  }});
+
+app.get('/api/grades/:gradeid', async (req, res) => {
+  try {
+    const id = +req.params.gradeid;
+    const sql = `
+      select *
+      from "grades"
+    where "gradeId" = $1;`;
+    if (id <= 0) {
+      res.status(400).json({ error: 'given id is not a positive integer' });
+    } else {
+    const params = [id];
+    const result = await db.query(sql, params);
+    const grade = result.rows[0];
+      if (grade) {
+        res.status(200).json(grade);
+      } else {
+        res.status(404).json({ error: `Grade not found with "gradeId" ${id}`});
+      }}
+    } catch (err) {
+    res.status(500).json({ error: 'an unexpected error occurred' });
+  }
+});
+
+
+
+// app.post('/api/notes', async (req, res) => {
+//   try {
+//     if (req.body.content === undefined) {
+//       res.status(400).json({ error: 'Content property not found' });
+//     } else {
+//       const newObj = req.body;
+//       const jsonData = await newJsonData();
+//       const id = jsonData.nextId;
+//       newObj.id = id;
+//       jsonData.notes[id] = newObj;
+//       jsonData.nextId++;
+//       await creation(jsonData);
+//       res.status(201).json(newObj);
+//     }
+//   } catch (err) {
+//     res.status(500).json({ error: 'an unexpected error occurred' });
+//   }
+// });
+
+// app.delete('/api/notes/:id', async (req, res) => {
+//   try {
+//     const jsonData = await newJsonData();
+//     const id = +req.params.id;
+//     if (id <= 0) {
+//       res.status(400).json({ error: 'given id is not a positive integer' });
+//     } else if (jsonData.notes[id] === undefined) {
+//       res.status(400).json({ error: 'id not found in notes' });
+//     } else {
+//       delete jsonData.notes[id];
+//       await creation(jsonData);
+//       res.status(200).json({});
+//     }
+//   } catch (err) {
+//     res.status(500).json({ error: 'an unexpected error occurred' });
+//   }
+// });
+
+
+// app.put('/api/notes/:id', async (req, res) => {
+//   try {
+//     const jsonData = await newJsonData();
+//     const id = +req.params.id;
+//     const newInfo = req.body
+//     newInfo.id = id;
+//     if (id <= 0) {
+//       res.status(400).json({ error: 'given id is not a positive integer' });
+//     } else if (req.body.content === undefined) {
+//       res.status(400).json({ error: 'content propertiy not found' });
+//     } else if (jsonData.notes[id] === undefined) {
+//       res.status(400).json({ error: 'id not found in notes' });
+//     } else {
+//       jsonData.notes[id] = newInfo;
+//       await creation(jsonData);
+//       res.status(200).json(newInfo);
+//     }
+//   } catch (err) {
+//     res.status(500).json({ error: 'an unexpected error occurred' });
+//   }
+// });
+
+
+app.listen((8080), () => {
+  console.log('The server is listening to port 8080');
+});
