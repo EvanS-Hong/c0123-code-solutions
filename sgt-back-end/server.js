@@ -37,90 +37,106 @@ app.get('/api/grades', async (req, res) => {
     res.status(500).json({ error: 'an unexpected error occurred' });
   }});
 
-app.get('/api/grades/:gradeid', async (req, res) => {
+app.post('/api/grades', async (req, res) => {
   try {
-    const id = +req.params.gradeid;
+    const name = req.body.name;
+    const course = req.body.course;
+    const score = +req.body.score;
+    const params = [`${name}`, `${course}`, score];
     const sql = `
-      select *
-      from "grades"
-    where "gradeId" = $1;`;
-    if (id <= 0) {
-      res.status(400).json({ error: 'given id is not a positive integer' });
+      insert into "grades" ("name", "course", "score")
+      values ($1, $2, $3);
+      `
+    if (score === undefined ) {
+      res.status(400).json({ error: `missing value in score`});
+    } else if ( course === undefined ) {
+      res.status(400).json({ error: `missing value in grade` });
+    } else if ( name === undefined ) {
+      res.status(400).json({ error: `missing value in name` });
+    } else if ( score < 0 || score > 100 ) {
+      res.status(400).json({ error: `score is not a valid inter between 0-100` });
     } else {
-    const params = [id];
-    const result = await db.query(sql, params);
-    const grade = result.rows[0];
-      if (grade) {
-        res.status(200).json(grade);
-      } else {
-        res.status(404).json({ error: `Grade not found with "gradeId" ${id}`});
-      }}
-    } catch (err) {
+      const results = await db.query(sql, params);
+      res.status(201).json(`grade successfully inserted`);
+    }
+  } catch (err) {
+    console.log(err)
     res.status(500).json({ error: 'an unexpected error occurred' });
   }
 });
 
+app.put('/api/grades/:gradeid', async (req, res) => {
+  try {
+    const id = +req.params.gradeid;
+    const name = req.body.name;
+    const course = req.body.course;
+    const score = +req.body.score;
+    const params = [`${name}`, `${course}`, score, id];
+    const sql = `
+      update "grades"
+        set "name" = $1,
+            "course" = $2,
+            "score" = $3
+      where "gradeId" = $4
+      returning *;
+      `
+    if (score === undefined) {
+      res.status(400).json({ error: `missing value in score` });
+    } else if (course === undefined) {
+      res.status(400).json({ error: `missing value in grade` });
+    } else if (name === undefined) {
+      res.status(400).json({ error: `missing value in name` });
+    } else if (score < 0 || score > 100) {
+      res.status(400).json({ error: `score is not a valid inter between 0-100` });
+    } else {
+      const results = await db.query(sql, params);
+      const index = results.rows.length-1
+      const grade = results.rows[index];
+      if(grade) {
+        res.status(200).json(`grade successfully updated`);
+      } else {
+        res.status(404).json({ error: `Cannot find grade with gradeId: ${id}`});
+      }
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: 'an unexpected error occurred' });
+  }
+});
 
+app.delete('/api/grades/:gradeid', async (req, res) => {
+  try {
+    const id = +req.params.gradeid;
+    const params = [id];
+    console.log(id);
+    const sqlFind = `
+          select *
+          from "grades"
+         where "gradeId" = $1;
+        `
+    const sqlDelete = `
+          delete
+            from "grades"
+          where "gradeId" = $1
+          `
+    if ( id < 0 ) {
+      res.status(400).json({ error: `${id} is an invalid integer`})
+    } else {
+      const firstResults = await db.query(sqlFind, params);
+      const grade = firstResults.rows[0];
+        if (grade) {
+        const results = await db.query(sqlDelete, params)
+        res.status(204).json(`grade successfully deleted`);
+        } else {
+          res.status(404).json({ error: `Cannot find grade with gradeId: ${id}` });
+        }
+      }
+  } catch (err) {
+  console.log(err)
+  res.status(500).json({ error: 'an unexpected error occurred' });
+}
+});
 
-// app.post('/api/notes', async (req, res) => {
-//   try {
-//     if (req.body.content === undefined) {
-//       res.status(400).json({ error: 'Content property not found' });
-//     } else {
-//       const newObj = req.body;
-//       const jsonData = await newJsonData();
-//       const id = jsonData.nextId;
-//       newObj.id = id;
-//       jsonData.notes[id] = newObj;
-//       jsonData.nextId++;
-//       await creation(jsonData);
-//       res.status(201).json(newObj);
-//     }
-//   } catch (err) {
-//     res.status(500).json({ error: 'an unexpected error occurred' });
-//   }
-// });
-
-// app.delete('/api/notes/:id', async (req, res) => {
-//   try {
-//     const jsonData = await newJsonData();
-//     const id = +req.params.id;
-//     if (id <= 0) {
-//       res.status(400).json({ error: 'given id is not a positive integer' });
-//     } else if (jsonData.notes[id] === undefined) {
-//       res.status(400).json({ error: 'id not found in notes' });
-//     } else {
-//       delete jsonData.notes[id];
-//       await creation(jsonData);
-//       res.status(200).json({});
-//     }
-//   } catch (err) {
-//     res.status(500).json({ error: 'an unexpected error occurred' });
-//   }
-// });
-
-
-// app.put('/api/notes/:id', async (req, res) => {
-//   try {
-//     const jsonData = await newJsonData();
-//     const id = +req.params.id;
-//     const newInfo = req.body
-//     newInfo.id = id;
-//     if (id <= 0) {
-//       res.status(400).json({ error: 'given id is not a positive integer' });
-//     } else if (req.body.content === undefined) {
-//       res.status(400).json({ error: 'content propertiy not found' });
-//     } else if (jsonData.notes[id] === undefined) {
-//       res.status(400).json({ error: 'id not found in notes' });
-//     } else {
-//       jsonData.notes[id] = newInfo;
-//       await creation(jsonData);
-//       res.status(200).json(newInfo);
-//     }
-//   } catch (err) {
-//     res.status(500).json({ error: 'an unexpected error occurred' });
-//   }
-// });
 
 
 app.listen((8080), () => {
