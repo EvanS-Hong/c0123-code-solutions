@@ -37,7 +37,7 @@ app.post('/api/grades', async (req, res) => {
       res.status(400).json({ error: `missing value in grade` });
     } else if ( name === undefined ) {
       res.status(400).json({ error: `missing value in name` });
-    } else if ( score < 0 || score > 100 ) {
+    } else if ( score <= 0 || score > 100 ) {
       res.status(400).json({ error: `score=${score} is not a valid inter between 0-100` });
     } else {
       const params = [name, course, score];
@@ -77,7 +77,7 @@ app.put('/api/grades/:gradeid', async (req, res) => {
       res.status(400).json({ error: `missing value in grade` });
     } else if (name === undefined) {
       res.status(400).json({ error: `missing value in name` });
-    } else if (score < 0 || score > 100) {
+    } else if (score <= 0 || score > 100) {
       res.status(400).json({ error: `score is not a valid inter between 0-100` });
     } else {
       const results = await db.query(sql, params);
