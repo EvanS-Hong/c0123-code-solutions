@@ -110,7 +110,7 @@ app.delete('/api/grades/:gradeid', async (req, res) => {
       const results = await db.query(sqlDelete, params)
       const grade = results.rows[0];
         if (grade !== undefined) {
-       res.status(204).json(grade);
+       res.sendStatus(204)
         } else {
         res.status(404).json({ error: `Cannot find grade with gradeId: ${id}` });
         }
