@@ -31,7 +31,7 @@ app.get('/api/grades', async (req, res) => {
     from "grades";`
     const result = await db.query(sql)
     const grades = result.rows;
-      res.status(200).json(grade);
+      res.status(200).json(grades);
     } catch (err) {
     console.error('/api/notes error', err);
     res.status(500).json({ error: 'an unexpected error occurred' });
@@ -45,7 +45,8 @@ app.post('/api/grades', async (req, res) => {
     const params = [`${name}`, `${course}`, score];
     const sql = `
       insert into "grades" ("name", "course", "score")
-      values ($1, $2, $3);
+      values ($1, $2, $3)
+      returning *;
       `
     if (score === undefined ) {
       res.status(400).json({ error: `missing value in score`});
@@ -54,10 +55,12 @@ app.post('/api/grades', async (req, res) => {
     } else if ( name === undefined ) {
       res.status(400).json({ error: `missing value in name` });
     } else if ( score < 0 || score > 100 ) {
-      res.status(400).json({ error: `score is not a valid inter between 0-100` });
+      res.status(400).json({ error: `score=${score} is not a valid inter between 0-100` });
     } else {
       const results = await db.query(sql, params);
-      res.status(201).json(`grade successfully inserted`);
+      const index = results.rows.length - 1
+      const grade = results.rows[index];
+      res.status(201).json(grade);
     }
   } catch (err) {
     console.log(err)
@@ -93,7 +96,7 @@ app.put('/api/grades/:gradeid', async (req, res) => {
       const index = results.rows.length-1
       const grade = results.rows[index];
       if(grade) {
-        res.status(200).json(`grade successfully updated`);
+        res.status(200).json(grade);
       } else {
         res.status(404).json({ error: `Cannot find grade with gradeId: ${id}`});
       }
@@ -108,7 +111,6 @@ app.delete('/api/grades/:gradeid', async (req, res) => {
   try {
     const id = +req.params.gradeid;
     const params = [id];
-    console.log(id);
     const sqlFind = `
           select *
           from "grades"
@@ -126,7 +128,7 @@ app.delete('/api/grades/:gradeid', async (req, res) => {
       const grade = firstResults.rows[0];
         if (grade) {
         const results = await db.query(sqlDelete, params)
-        res.status(204).json(`grade successfully deleted`);
+        res.status(204);
         } else {
           res.status(404).json({ error: `Cannot find grade with gradeId: ${id}` });
         }
