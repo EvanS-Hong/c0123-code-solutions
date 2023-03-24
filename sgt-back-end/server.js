@@ -31,12 +31,6 @@ app.post('/api/grades', async (req, res) => {
     const name = req.body.name;
     const course = req.body.course;
     const score = +req.body.score;
-    const params = [name, course, score];
-    const sql = `
-      insert into "grades" ("name", "course", "score")
-      values ($1, $2, $3)
-      returning *;
-      `
     if (score === undefined ) {
       res.status(400).json({ error: `missing value in score`});
     } else if ( course === undefined ) {
@@ -46,8 +40,14 @@ app.post('/api/grades', async (req, res) => {
     } else if ( score < 0 || score > 100 ) {
       res.status(400).json({ error: `score=${score} is not a valid inter between 0-100` });
     } else {
+      const params = [name, course, score];
+      const sql = `
+      insert into "grades" ("name", "course", "score")
+      values ($1, $2, $3)
+      returning *;
+      `
       const results = await db.query(sql, params);
-      const grade = results.rows;
+      const grade = results.rows[0];
       res.status(201).json(grade);
     }
   } catch (err) {
@@ -81,8 +81,7 @@ app.put('/api/grades/:gradeid', async (req, res) => {
       res.status(400).json({ error: `score is not a valid inter between 0-100` });
     } else {
       const results = await db.query(sql, params);
-      const index = results.rows.length-1
-      const grade = results.rows[index];
+      const grade = results.rows[0];
       if(grade) {
         res.status(200).json(grade);
       } else {
@@ -109,9 +108,9 @@ app.delete('/api/grades/:gradeid', async (req, res) => {
       res.status(400).json({ error: `${id} is an invalid integer`})
     } else {
       const results = await db.query(sqlDelete, params)
-      const grade = results.rows;
-        if (grade !== []) {
-       res.status(204);
+      const grade = results.rows[0];
+        if (grade !== undefined) {
+       res.status(204).json(grade);
         } else {
         res.status(404).json({ error: `Cannot find grade with gradeId: ${id}` });
         }
