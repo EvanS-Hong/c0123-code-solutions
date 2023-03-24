@@ -31,7 +31,7 @@ app.post('/api/grades', async (req, res) => {
     const name = req.body.name;
     const course = req.body.course;
     const score = +req.body.score;
-    if (score === undefined ) {
+    if (Number.isNaN(score)) {
       res.status(400).json({ error: `missing value in score`});
     } else if ( course === undefined ) {
       res.status(400).json({ error: `missing value in grade` });
@@ -71,7 +71,7 @@ app.put('/api/grades/:gradeid', async (req, res) => {
       where "gradeId" = $4
       returning *;
       `
-    if (score === undefined) {
+    if (Number.isNaN(score)) {
       res.status(400).json({ error: `missing value in score` });
     } else if (course === undefined) {
       res.status(400).json({ error: `missing value in grade` });
@@ -117,7 +117,7 @@ app.delete('/api/grades/:gradeid', async (req, res) => {
       }
   } catch (err) {
   console.log(err)
-  res.status(500).json({ error: 'an unexpected error occurred' });
+  res.status(500).json({ error: 'an unexpected error oc curred' });
 }
 });
 
