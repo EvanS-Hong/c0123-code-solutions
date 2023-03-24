@@ -1,6 +1,4 @@
 import express from './node_modules/express/index.js';
-import { writeFile } from 'node:fs/promises';
-import { readFile } from 'node:fs/promises';
 
 import pg from 'pg';
 
@@ -10,15 +8,6 @@ const db = new pg.Pool({
     rejectUnauthorized: false
   }
 });
-
-
-async function newJsonData() {
-  return JSON.parse(await readFile("./data.json"));
-}
-
-async function creation(data) {
-  return await writeFile("./data.json", JSON.stringify(data, null, 2), 'utf8');
-}
 
 const app = express();
 
@@ -42,7 +31,7 @@ app.post('/api/grades', async (req, res) => {
     const name = req.body.name;
     const course = req.body.course;
     const score = +req.body.score;
-    const params = [`${name}`, `${course}`, score];
+    const params = [name, course, score];
     const sql = `
       insert into "grades" ("name", "course", "score")
       values ($1, $2, $3)
@@ -58,8 +47,7 @@ app.post('/api/grades', async (req, res) => {
       res.status(400).json({ error: `score=${score} is not a valid inter between 0-100` });
     } else {
       const results = await db.query(sql, params);
-      const index = results.rows.length - 1
-      const grade = results.rows[index];
+      const grade = results.rows;
       res.status(201).json(grade);
     }
   } catch (err) {
@@ -111,26 +99,21 @@ app.delete('/api/grades/:gradeid', async (req, res) => {
   try {
     const id = +req.params.gradeid;
     const params = [id];
-    const sqlFind = `
-          select *
-          from "grades"
-         where "gradeId" = $1;
-        `
     const sqlDelete = `
           delete
             from "grades"
           where "gradeId" = $1
+          returning *
           `
     if ( id < 0 ) {
       res.status(400).json({ error: `${id} is an invalid integer`})
     } else {
-      const firstResults = await db.query(sqlFind, params);
-      const grade = firstResults.rows[0];
-        if (grade) {
-        const results = await db.query(sqlDelete, params)
-        res.status(204);
+      const results = await db.query(sqlDelete, params)
+      const grade = results.rows;
+        if (grade !== []) {
+       res.status(204);
         } else {
-          res.status(404).json({ error: `Cannot find grade with gradeId: ${id}` });
+        res.status(404).json({ error: `Cannot find grade with gradeId: ${id}` });
         }
       }
   } catch (err) {
