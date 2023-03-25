@@ -6,9 +6,9 @@ class shape {
   };
 
   print() {
-    console.log(this.area + this.circumference);
+    return `area: ${this.area}, circumference: ${this.circumference}`
   }
  }
 
 const newArea = new shape(5, 8);
-console.log(newArea);
+console.log(newArea.print());
