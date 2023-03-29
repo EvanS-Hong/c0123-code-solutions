@@ -6,7 +6,6 @@ export default function ToggleButton(bgColor) {
 
   function handleClick() {
     setIndex( index + 1 );
-    console.log(index);
   }
 
   let textColor = index < 12 ? 'white' : 'black';
