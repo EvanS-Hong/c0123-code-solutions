@@ -14,12 +14,12 @@ export default function RegisterFormU() {
       <h1> Uncontrolled form </h1>
     <form onSubmit={handleSubmit}>
       <label>
-        Username
+        username
         <input name="userName" />
       </label>
       <br />
       <label>
-        PassWord
+        password
         <input name="passWord" />
       </label>
       <br />

@@ -1,5 +1,5 @@
 import RegisterFormU from './RegistrationFormUncontrolled';
-import RegisterFormC from './RegistrationFromController';
+import RegisterFormC from './RegistrationFormController';
 
 function App() {
   return (
