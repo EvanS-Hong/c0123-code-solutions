@@ -4,16 +4,15 @@ export default function ToggleButton({text, color}) {
 
   const [isClicked, setIsClicked] = useState(false);
   console.log('useState', isClicked);
+
   function handleClick() {
-    console.log('useState', isClicked);
+    console.log('beforeSetter', isClicked);
     setIsClicked(!isClicked);
-    console.log('useState', isClicked);
+    console.log('afterSetter', isClicked);
   }
-  if (!isClicked) {
- return (
-    <button onClick={handleClick} style={{backgroundColor: 'white'}}> {text} </button>
-  )} else {
+
+  const bgColor = isClicked ? color : 'white';
     return (
-    <button onClick={handleClick} style={{ backgroundColor: color }}> {text} </button>
-  )}
- }
+      <button onClick={handleClick} style={{ backgroundColor: bgColor }}> {text} </button>
+    );
+}
