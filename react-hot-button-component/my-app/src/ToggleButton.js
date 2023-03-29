@@ -27,6 +27,6 @@ export default function ToggleButton(bgColor) {
   }
 
   return (
-    <button onClick={handleClick} style={{ backgroundColor: bgColor, color: textColor, width: '6rem', height: '3rem', fontSize: '1rem', left: '3rem'}} > Hot Button </button>
+    <button onClick={handleClick} style={{ backgroundColor: bgColor, color: textColor, width: '6rem', height: '3rem', fontSize: '1rem'}} > Hot Button </button>
   )
 }
