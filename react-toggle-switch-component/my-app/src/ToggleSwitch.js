@@ -8,14 +8,13 @@ export default function ToggleSwitch() {
     setToggle(!toggle);
   }
 
- const text = !toggle ? 'off' : 'on';
-//  const css = !toggle ? '.switch  : 'on';
+ const text = !toggle ? 'Off' : 'On';
   return (
     <>
-   <div className="switch">
-    <button className="slider round" onClick={handleToggle} />
-    <span  />
-   </div>
+      <label className="switch">
+        <input onClick={handleToggle} type="checkbox" />
+          <span className="slider round"></span>
+      </label>
    <h1> {text} </h1>
    </>
     )

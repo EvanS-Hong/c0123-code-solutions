@@ -2,6 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 30%;
+}
+
+h1 {
+  margin-left: 1%;
 }
 
 .switch {
