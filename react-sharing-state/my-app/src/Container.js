@@ -19,9 +19,9 @@ export default function Container({ items }) {
     <div>
       <div>{items[current]}</div>
       <div>
-        <Button onClick={incrementIndex} text="Prev" />
+        <Button onClick={decremenetIndex} text="Prev" />
         <Buttons onClick={setIndex} count={items.length} index={current}/>
-        <Button onClick={decremenetIndex}  text="Next" />
+        <Button onClick={incrementIndex}  text="Next" />
       </div>
     </div>
   );
