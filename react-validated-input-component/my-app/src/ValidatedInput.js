@@ -2,7 +2,6 @@ import {useState} from 'react';
 
 export default function ValidatedInputs() {
   const [passWord, setPassWord] = useState('');
-  // const [text, setText] =  useState('');
 
   let text;
   if (passWord === '') {
