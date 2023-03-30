@@ -16,7 +16,6 @@ export default function ValidatedInputs() {
 
   return (
     <div>
-      <form>
         <label>
           password
           <input
@@ -25,7 +24,6 @@ export default function ValidatedInputs() {
           value={passWord}
             onChange={e => setPassWord(e.target.value)} /> {icon}
         </label>
-      </form>
       <p> {text} </p>
     </div>
   )
