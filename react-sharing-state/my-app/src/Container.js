@@ -4,11 +4,11 @@ export default function Container({ items }) {
   const [current, setCurrent] = useState(0);
 
   function incrementIndex() {
-    setCurrent(((current - 1) + items.length) % items.length);
+   setCurrent((current + 1) % items.length);
   }
 
   function decremenetIndex() {
-    setCurrent((current + 1) % items.length);
+     setCurrent(((current - 1) + items.length) % items.length);
   }
 
   function setIndex(x) {
