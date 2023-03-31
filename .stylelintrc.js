@@ -5,15 +5,14 @@ module.exports =
     "stylelint-config-standard"
   ],
   "rules": {
-    "no-empty-source": null
-  }
-  // Modify name pattern rules to accommodate Create React App conventions
-  "selector-class-pattern": [
-    "^([A-Za-z][a-z0-9]*)(-[a-z0-9]+)*$",
-    {
-      "message": (selector) => `Expected class selector "${selector}" to be kebab-case`,
-    },
-  ],
+    "no-empty-source": null,
+    // Modify name pattern rules to accommodate Create React App conventions
+    "selector-class-pattern": [
+      "^([A-Za-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": (selector) => `Expected class selector "${selector}" to be kebab-case`,
+      },
+    ],
     "keyframes-name-pattern": [
       "^([A-Za-z][a-z0-9]*)(-[a-z0-9]+)*$",
       {
@@ -21,3 +20,4 @@ module.exports =
       },
     ],
   }
+}

@@ -2,31 +2,27 @@ import { useState } from 'react';
 import './Accordian.css'
 
 export default function AccordionCreation({list}) {
-  const [status, setStatus] = useState(0);
+  const [index, setIndex] = useState(0);
 
   function handleStatus(index) {
-    setStatus(index);
+    setIndex(index);
   }
-
 
   return (
     <>
-      <AccordianMechanics status={status} customOnClick={handleStatus} list={list}/>
+      <AccordianMechanics index={index} customOnClick={handleStatus} list={list}/>
     </>
        )
 }
 
- export function AccordianMechanics({list, customOnClick, status}) {
-
+ export function AccordianMechanics({list, customOnClick, index}) {
   const listItems = list.map(list =>
     <li key={list.id}>
       <button onClick={() => customOnClick(list.id)}> {list.name} </button>
-      {list.id === status ? (
+      {list.id === index ? (
       <p> {list.text} </p>
       ): undefined }
     </li>)
-
-
 
     return (
       <>
