@@ -13,6 +13,13 @@ module.exports =
         "message": (selector) => `Expected class selector "${selector}" to be kebab-case`,
       },
     ],
+    "keyframes-name-pattern": [
+
+      "^([A-Za-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": (selector) => `Expected class selector "${selector}" to be kebab-case`,
+      },
+    ],
       "keyframes-name-pattern": [
         "^([A-Za-z][a-z0-9]*)(-[a-z0-9]+)*$",
         {
