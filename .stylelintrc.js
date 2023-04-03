@@ -14,10 +14,17 @@ module.exports =
       },
     ],
     "keyframes-name-pattern": [
+
       "^([A-Za-z][a-z0-9]*)(-[a-z0-9]+)*$",
       {
-        message: (name) => `Expected keyframe name "${name}" to be kebab-case`,
+        "message": (selector) => `Expected class selector "${selector}" to be kebab-case`,
       },
     ],
+      "keyframes-name-pattern": [
+        "^([A-Za-z][a-z0-9]*)(-[a-z0-9]+)*$",
+        {
+          message: (name) => `Expected keyframe name "${name}" to be kebab-case`,
+        },
+      ],
   }
 }
