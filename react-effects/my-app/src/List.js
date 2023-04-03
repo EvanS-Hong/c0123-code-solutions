@@ -18,9 +18,10 @@ export default function List() {
       }
       catch (error){
         setError(error)
-      }
+      } finally {
+         setIsLoading(false);
     }
-     setIsLoading(false);
+  }
    loadItems();
 }, []);
 
