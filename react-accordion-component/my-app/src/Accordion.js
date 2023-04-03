@@ -4,22 +4,23 @@ import './Accordian.css'
 export default function AccordionCreation({list}) {
   const [index, setIndex] = useState(0);
 
-  function handleStatus(index) {
-    setIndex(index);
+  function handleStatus(spot) {
+    index === spot ? setIndex(0) : setIndex(spot);
+
   }
 
   return (
     <>
-      <AccordianMechanics index={index} customOnClick={handleStatus} list={list}/>
+      <AccordianMechanics spot={index} customOnClick={handleStatus} list={list}/>
     </>
        )
 }
 
- export function AccordianMechanics({list, customOnClick, index}) {
+ export function AccordianMechanics({list, customOnClick, spot}) {
   const listItems = list.map(list =>
     <li key={list.id}>
       <button onClick={() => customOnClick(list.id)}> {list.name} </button>
-      {list.id === index ? (
+      {list.id === spot ? (
       <p> {list.text} </p>
       ): undefined }
     </li>)
