@@ -18,7 +18,7 @@ export default function User({ userId, onCancel }) {
           setUser(jsonData);
         }
       } catch (err) {
-        console.error(err);
+        setError(err);
       } finally {
         setIsLoading(false);
       }
