@@ -52,35 +52,10 @@ export default function Todos() {
   }
 
  function toggleCompleted(todoId) {
-    /* Find the index of the todo with the matching todoId in the state array.
-     * Get its "isCompleted" status.
-     * Make a new object containing ONE PROPERTY: the opposite "isCompleted" status.
-     * Use fetch to send a PATCH request to `/api/todos/${todoId}`
-     * Once the response JSON is received and parsed,
-     *   - create a shallow copy of the todos array from state
-     *   - replace the old todo with the todo received from the server
-     *   - handle errors appropriate (as mentioned above)
-     *
-     * NOTE: "toggle" means to flip back and forth, so clicking a todo
-     * in the list repeatedly should "toggle" its isCompleted status back and forth.
-     *
-     * DO NOT try to calculate the index of the todo by subtracting 1 from the id.
-     *
-     * DO NOT MUTATE the original state array, nor any objects within it.
-     *
-     * TIP: `Array.map` is a convenient way to make a copy of an array -- compare
-     * the Todo IDs and map the existing Todo if it is not the one that was
-     * just updated, and map the updated array if it is.
-     * TIP: When calling fetch, be sure to SERIALIZE the updates in the body with JSON.stringify()
-     * And specify the "Content-Type" header as "application/json"
-     */
     for (let keys in todos) {
       if (todos[keys].todoId === todoId) {
-        const status = {
-          todoId: todos[keys].todoId,
-          isCompleted: `${todos[keys].isCompleted}`,
-          task: todos[keys].task
-        }
+        const status = { isCompleted: !todos[keys].isCompleted }
+        console.log(status);
         async function swapToDos(todoId) {
           try {
             const res = await fetch(url(`/api/todos/${todoId}`), {
