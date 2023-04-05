@@ -37,7 +37,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
      returning "userId", "username", "createdAt";
      `;
     const results = await db.query(sql, params);
-    const grade = results.rows;
+    const grade = results.rows[0];
     res.status(201).json(grade);
   } catch (err) {
     next(err);
