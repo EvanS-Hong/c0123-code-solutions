@@ -30,8 +30,7 @@ export default function Todos() {
     getToDos();
   }, []);
 
-  function addTodo(newTodo) {
-    async function postTodos(newTodo) {
+  async function addTodo(newTodo) {
       try {
         const res = await fetch(url('/api/todos'),{
           method: "Post",
@@ -45,18 +44,13 @@ export default function Todos() {
       } catch (err) {
         setError(err) }
       }
-      postTodos(newTodo);
 
 
 
-  }
-
- function toggleCompleted(todoId) {
+ async function toggleCompleted(todoId) {
     for (let keys in todos) {
       if (todos[keys].todoId === todoId) {
         const status = { isCompleted: !todos[keys].isCompleted }
-        console.log(status);
-        async function swapToDos(todoId) {
           try {
             const res = await fetch(url(`/api/todos/${todoId}`), {
               method: "PATCH",
@@ -66,18 +60,16 @@ export default function Todos() {
               body: JSON.stringify(status),
             })
             const jsonData = await res.json();
-            console.log(jsonData);
             const newArray = todos.map((todo) => todo.todoId === todoId ? jsonData : todo)
-            console.log(newArray);
             setTodos(newArray);
           } catch (err) {
             setError(err)
           }
         }
-      swapToDos(todoId);
+      }
     }
-  }
-}
+
+
 
 
   if (isLoading) {
@@ -98,4 +90,5 @@ export default function Todos() {
       </div>
     </div>
   );
+
 }
