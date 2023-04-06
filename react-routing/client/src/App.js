@@ -9,7 +9,6 @@ import Catalog from "./pages/Catalog.js";
 
 function App() {
   return (
-        <div>
           <Routes>
             <Route path='/' element={<Header />} >
               <Route index element={<Catalog />} />
@@ -18,9 +17,6 @@ function App() {
               <Route path='*' element={<NotFound />} />
             </Route>
           </Routes>
-        </div>
-
-
   );
 }
 
