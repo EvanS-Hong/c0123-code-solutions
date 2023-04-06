@@ -22,7 +22,7 @@ export function authorizationMiddleware(req, res, next) {
     */
   const auth = req.get('Authorization');
   const token = auth.split('Bearer ')[1];
-  if (!token || !auth) {
+  if (!token || auth === undefined) {
     throw new ClientError(401, 'authentication required');
   }
   const payload = jwt.verify(token, process.env.TOKEN_SECRET);
