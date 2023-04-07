@@ -26,25 +26,19 @@ export function useTodos() {
     }
   }, [todos]);
 
-  function addTodo(newTodo) {
-    /* TODO: Call the API function that creates a Todo item.
-     * When the promise returned by that function resolves, update the `todos` state.
-     * Note that it is critical that you pass a _new_ array. Do not modify the `todos` array.
-     */
-    (async () => {
+ async function addTodo (newTodo) {
       const jsonData = await createTodo(newTodo);
       setTodos(prev => todos.concat(jsonData));
-    })();
+
   }
 
-  function toggleCompleted(todoId) {
+ async function toggleCompleted(todoId) {
     /* TODO: Find the Todo item being updated, toggle its completed prop, and call
      * the API function that updates a Todo item.
      * When the promise returned by that function resolves, update the `todos` state.
      * When updating this state, use the updated `todo` returned from the API.
      * Note that it is critical that you pass a _new_ array. Do not modify the `todos` array.
      */
-    (async () => {
       for (let keys in todos) {
         if (todos[keys].todoId === todoId) {
           const newTodo = todos[keys];
@@ -55,7 +49,6 @@ export function useTodos() {
           setTodos(newArray);
         }
       }
-    })();
   }
 
   return {
