@@ -27,6 +27,9 @@
       "error",
       "multi-line"
     ],
+    "comma-dangle":[
+      "error", "only-multiline"
+    ],
     "no-restricted-globals": [
       "error",
       {
