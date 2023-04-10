@@ -21,15 +21,16 @@ export default  function UploadForm() {
      */
     event.preventDefault();
     const formData = new FormData(event.target);
-
     const res = fetch('http://localhost:8080/api/uploads', {
       method: "POST",
       body: formData,
   });
-    const jsonData = await res;
-
+    if (!res.ok) {
+      throw new Error(`error ${res.status}`);
+    } else {
+    const jsonData = await res.json;
     jsonData === undefined ? console.error('Something went wrong') : console.log(jsonData);
-
+    }
 }
 
   return (
