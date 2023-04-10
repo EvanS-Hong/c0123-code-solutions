@@ -20,17 +20,22 @@ export default  function UploadForm() {
      * https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_a_file
      */
     event.preventDefault();
+    try {
     const formData = new FormData(event.target);
-    const res = fetch('http://localhost:8080/api/uploads', {
+    const res = await fetch('http://localhost:8080/api/uploads', {
       method: "POST",
       body: formData,
   });
     if (!res.ok) {
       throw new Error(`error ${res.status}`);
     } else {
-    const jsonData = await res.json;
+    const jsonData = await res.json();
     jsonData === undefined ? console.error('Something went wrong') : console.log(jsonData);
     }
+  } catch (err) {
+      console.error(err);
+    }
+
 }
 
   return (
