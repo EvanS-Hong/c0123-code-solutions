@@ -6,13 +6,23 @@ describe('evenNumbers', () => {
     const result = evenNumbers(numbers);
     expect(result).toEqual([4, 10, 0]);
   });
+  it('does not accept NAN', () => {
+    const numbers = [NaN];
+    const result = evenNumbers(numbers);
+    expect(result).toEqual([]);
+  });
 });
 
 describe('toDolars', () => {
   it('returns a number in $ format', () => {
-    const amount = 3;
+    const amount = 3.12;
     const result = toDollars(amount);
-    expect(result).toEqual(`$${amount}.00`);
+    expect(result).toEqual(`$${amount}`);
+  });
+  it('accepts negative values', () => {
+    const amount = -43.23;
+    const result = toDollars(amount);
+    expect(result).toEqual(`$${amount}`);
   });
 });
 
@@ -22,6 +32,12 @@ describe('divideBy', () => {
     const divisor = 2;
     const result = divideBy(numbers, divisor);
     expect(result).toEqual([1, 3, 4, 5, 7, 10]);
+  });
+  it('does not modify the original array', () => {
+    const numbers = [2, 6, 8, 10, 14, 20];
+    const divisor = 2;
+    divideBy(numbers, divisor);
+    expect(numbers).toEqual([2, 6, 8, 10, 14, 20]);
   });
 });
 
