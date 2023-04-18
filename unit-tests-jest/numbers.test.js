@@ -15,14 +15,14 @@ describe('evenNumbers', () => {
 
 describe('toDolars', () => {
   it('returns a number in $ format', () => {
-    const amount = 3.12;
+    const amount = 12.4335;
     const result = toDollars(amount);
-    expect(result).toEqual(`$${amount}`);
+    expect(result).toEqual('$12.4335');
   });
   it('accepts negative values', () => {
     const amount = -43.23;
     const result = toDollars(amount);
-    expect(result).toEqual(`$${amount}`);
+    expect(result).toEqual('$-43.23');
   });
 });
 
