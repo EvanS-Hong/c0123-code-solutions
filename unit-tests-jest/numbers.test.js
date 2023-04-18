@@ -17,7 +17,7 @@ describe('toDolars', () => {
   it('returns a number in $ format', () => {
     const amount = 12.4335;
     const result = toDollars(amount);
-    expect(result).toEqual('$12.4335');
+    expect(result).toEqual('$12.43');
   });
   it('accepts negative values', () => {
     const amount = -43.23;

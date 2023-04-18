@@ -9,10 +9,7 @@ export function evenNumbers(numbers) {
  * Returns a number formatted in dollars and cents.
  */
 export function toDollars(amount) {
-  const splitValue = amount.toString().split('.');
-  const dollar = splitValue[0];
-  const cents = splitValue[1];
-  return `$${dollar}.${cents}`;
+  return `$${amount.toFixed(2)}`;
 }
 
 /**
